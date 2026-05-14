@@ -2,14 +2,22 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
 const farmerRoutes = require('./routes/farmerRoutes');
-const buyerRoutes = require('./routes/buyerRoutes');   // ← NEW
+const buyerRoutes = require('./routes/buyerRoutes');
 const protect = require('./middleware/authMiddleware');
 
 const app = express();
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
@@ -19,7 +27,7 @@ mongoose.connect(process.env.MONGO_URI)
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/farmer', farmerRoutes);
-app.use('/api/buyer', buyerRoutes);     // ← NEW
+app.use('/api/buyer', buyerRoutes);
 
 app.get('/', (req, res) => {
   res.send('API Running');
