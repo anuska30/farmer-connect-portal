@@ -11,7 +11,8 @@ const {
   getAllCrops,
   getMyCrops,
   updateCrop,
-  deleteCrop
+  deleteCrop,
+  getCropById
 } = require('../controllers/farmerController');
 
 // ─── PUBLIC ROUTE (no login needed) ──────────────────
@@ -19,7 +20,7 @@ router.get('/crops', getAllCrops);
 
 // ─── PROTECTED ROUTES (login required) ───────────────
 router.post('/crop', protect, addCrop);
-router.get('/my-crops', protect, getMyCrops);
+router.get('/crop/:id', protect, getCropById);
 router.put('/crop/:id', protect, updateCrop);
 router.delete('/crop/:id', protect, deleteCrop);
 
