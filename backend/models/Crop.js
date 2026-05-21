@@ -1,51 +1,52 @@
 // backend/models/Crop.js
-
 const mongoose = require('mongoose');
 
 const cropSchema = new mongoose.Schema({
-
   name: {
     type: String,
-    required: true,    // crop name is compulsory
+    required: true,
     trim: true
   },
-
   description: {
     type: String,
-    required: true     // details about the crop
+    required: true
   },
-
   price: {
     type: Number,
-    required: true     // price per unit
+    required: true
   },
-
   unit: {
     type: String,
-    enum: ['kg', 'quintal', 'ton', 'piece'],  // allowed units
+    enum: ['kg', 'quintal', 'ton', 'piece'],
     default: 'kg'
   },
-
   quantity: {
     type: Number,
-    required: true     // how much is available
+    required: true
   },
-
   category: {
     type: String,
     enum: ['vegetables', 'fruits', 'grains', 'dairy', 'other'],
     default: 'other'
   },
-
   farmer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',       // links crop to the farmer who created it
+    ref: 'User',
     required: true
   },
-
   isAvailable: {
     type: Boolean,
-    default: true      // crop is available by default
+    default: true
+  },
+
+  // ✅ NEW: Rating Fields
+  averageRating: {
+    type: Number,
+    default: 0
+  },
+  totalRatings: {
+    type: Number,
+    default: 0
   }
 
 }, { timestamps: true });

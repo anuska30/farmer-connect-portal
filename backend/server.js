@@ -10,6 +10,7 @@ const farmerRoutes = require('./routes/farmerRoutes');
 const buyerRoutes = require('./routes/buyerRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const ratingRoutes = require('./routes/ratingRoutes');
 const protect = require('./middleware/authMiddleware');
 
 const app = express();
@@ -32,6 +33,7 @@ app.use('/api/farmer', farmerRoutes);
 app.use('/api/buyer', buyerRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/payment', paymentRoutes);
+app.use('/api/rating', ratingRoutes);
 
 app.get('/', (req, res) => {
   res.send('API Running');
